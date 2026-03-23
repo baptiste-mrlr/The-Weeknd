@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Weeknd 🎤</title>
+    <style>
+        /* ---------- Palette sobre noir + rouge ---------- */
+        :root {
+            --bg: #050507;              /* noir très sombre */
+            --bg-alt: #0b0b10;
+            --accent: #d4263b;          /* rouge profond, pas fluo */
+            --accent-soft: #f05a6b;     /* rouge légèrement plus clair */
+            --text: #f5f5f5;
+            --muted: #a0a0b5;
+            --border: rgba(255, 255, 255, 0.10);
+            --shadow-soft: 0 0 26px rgba(212, 38, 59, 0.55);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            font-family: Georgia, "Times New Roman", serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at 10% 0%, rgba(212,38,59,0.38) 0, transparent 40%),
+                linear-gradient(150deg, #020204, #050507 40%, #020204 100%);
+            background-attachment: fixed;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .page {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1.75rem 1.25rem 2.5rem;
+        }
+
+        /* ---------- En-tête ---------- */
+
+        header.site-header {
+            border-radius: 18px;
+            border: 1px solid var(--border);
+            padding: 1.2rem 1.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(120deg, rgba(5,5,10,0.96), rgba(10,10,18,0.96));
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.25rem;
+        }
+
+        .logo-mark {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.14);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent-soft);
+            box-shadow: 0 0 18px rgba(212,38,59,0.55);
+        }
+
+        .header-text-block {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .header-kicker {
+            font-size: 0.7rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--accent-soft);
+        }
+
+        .header-title {
+            font-size: clamp(1.6rem, 2.4vw, 2.1rem);
+            line-height: 1.1;
+        }
+
+        .header-sub {
+            font-size: 0.9rem;
+            color: var(--muted);
+            max-width: 32rem;
+        }
+
+        nav.main-nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.25rem;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+        }
+
+        nav.main-nav a {
+            color: var(--muted);
+            padding-bottom: 0.15rem;
+            border-bottom: 2px solid transparent;
+            transition: color 0.2s ease, border-color 0.2s ease;
+        }
+
+        nav.main-nav a:hover,
+        nav.main-nav a:focus {
+            color: var(--accent-soft);
+            border-color: var(--accent-soft);
+        }
+
+        /* ---------- Grille 2 colonnes ---------- */
+
+        main.layout {
+            display: grid;
+            grid-template-columns: 3fr 2.1fr; /* 2 colonnes obligatoires */
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .column {
+            border-radius: 18px;
+            border: 1px solid var(--border);
+            background: radial-gradient(circle at 0 0, rgba(212,38,59,0.22), transparent 55%),
+                        #050507;
+            padding: 1.35rem 1.4rem 1.7rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .column-inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        h2.section-title {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--accent-soft);
+            margin-bottom: 0.6rem;
+        }
+
+        p.lead {
+            font-size: 0.95rem;
+            color: var(--muted);
+            margin-bottom: 1.1rem;
+        }
+
+        /* ---------- Colonne gauche ---------- */
+
+        .hero-block {
+            display: grid;
+            grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 1.2rem;
+        }
+
+        .hero-text h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.35rem;
+        }
+
+        .tagline {
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin-bottom: 0.6rem;
+        }
+
+        .pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .pill {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            padding: 0.32rem 0.75rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            color: var(--accent-soft);
+        }
+
+        .hero-cta {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            padding: 0.55rem 1.1rem;
+            border-radius: 999px;
+            border: 1px solid rgba(245,245,245,0.35);
+            background: linear-gradient(120deg, var(--accent), var(--accent-soft));
+            color: #050507;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .hero-cta:hover,
+        .hero-cta:focus {
+            transform: translateY(-1px);
+            box-shadow: 0 0 30px rgba(212,38,59,0.75);
+        }
+
+        .hero-visual {
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.16);
+        }
+
+        .hero-visual img {
+            object-fit: cover;
+            height: 100%;
+        }
+
+        .hero-chip {
+            position: absolute;
+            right: 1.2rem;
+            bottom: 1.2rem;
+            padding: 0.35rem 0.75rem;
+            font-size: 0.7rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.3);
+            background: rgba(5,5,10,0.9);
+            color: var(--muted);
+        }
+
+        .hero-visual-wrapper {
+            position: relative;
+        }
+
+        /* Liste de morceaux */
+
+        .tracks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+            gap: 0.8rem;
+            margin-top: 0.6rem;
+        }
+
+        .track-card {
+            border-radius: 14px;
+            padding: 0.7rem 0.8rem 0.85rem;
+            background: #09090f;
+            border: 1px solid rgba(255,255,255,0.14);
+            transition: border-color 0.18s ease, background 0.18s ease, transform 0.18s ease;
+        }
+
+        .track-name {
+            font-size: 0.9rem;
+            margin-bottom: 0.1rem;
+        }
+
+        .track-tagline {
+            font-size: 0.75rem;
+            color: var(--muted);
+        }
+
+        .track-pill {
+            margin-top: 0.35rem;
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: var(--accent-soft);
+        }
+
+        .track-card:hover,
+        .track-card:focus-within {
+            border-color: var(--accent-soft);
+            background: #0c0c14;
+            transform: translateY(-2px);
+        }
+
+        /* ---------- Colonne droite ---------- */
+
+        .mode-label {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--muted);
+            margin-bottom: 0.4rem;
+        }
+
+        .mode-box {
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.16);
+            padding: 0.35rem 0.5rem;
+            display: inline-flex;
+            gap: 0.35rem;
+            background: #050508;
+            margin-bottom: 1rem;
+        }
+
+        .mode-pill {
+            font-size: 0.7rem;
+            padding: 0.28rem 0.7rem;
+            border-radius: 999px;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: var(--muted);
+        }
+
+        .mode-pill.is-active {
+            background: rgba(212,38,59,0.18);
+            color: var(--accent-soft);
+        }
+
+        .note-card {
+            border-radius: 14px;
+            padding: 0.85rem 0.9rem;
+            background: #09090f;
+            border: 1px solid rgba(255,255,255,0.16);
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin-bottom: 0.9rem;
+        }
+
+        .listen-card {
+            border-radius: 16px;
+            padding: 0.8rem 0.9rem;
+            background: linear-gradient(135deg, #181018, #220810);
+            border: 1px solid rgba(212,38,59,0.7);
+            color: var(--text);
+            font-size: 0.85rem;
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 1.2rem;
+        }
+
+        .listen-bar {
+            margin-top: 0.5rem;
+            height: 3px;
+            border-radius: 999px;
+            background: rgba(245,245,245,0.15);
+            overflow: hidden;
+        }
+
+        .listen-bar span {
+            display: block;
+            height: 100%;
+            width: 70%;
+            background: linear-gradient(90deg, var(--accent-soft), var(--accent));
+            animation: pulse 2.3s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { width: 45%; }
+            100% { width: 95%; }
+        }
+
+        .listen-hint {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            margin-top: 0.55rem;
+            color: var(--muted);
+        }
+
+        .journal-block {
+            margin-top: 1.1rem;
+        }
+
+        .journal-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: var(--muted);
+            margin-bottom: 0.35rem;
+        }
+
+        .journal-area {
+            min-height: 90px;
+            border-radius: 12px;
+            border: 1px dashed rgba(255,255,255,0.25);
+            padding: 0.6rem 0.75rem;
+            font-size: 0.84rem;
+            color: var(--muted);
+            background: #050508;
+        }
+
+        .caret {
+            display: inline-block;
+            width: 0.55ch;
+            height: 0.9em;
+            margin-left: 0.1rem;
+            background: var(--accent-soft);
+            animation: blink 1s steps(1, start) infinite;
+            vertical-align: text-bottom;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            50.01%, 100% { opacity: 0; }
+        }
+
+        /* ---------- Pied de page ---------- */
+
+        footer.site-footer {
+            margin-top: 1.75rem;
+            padding: 0.85rem 0.4rem 0.3rem;
+            font-size: 0.75rem;
+            color: var(--muted);
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.16);
+        }
+
+        footer.site-footer span {
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            font-size: 0.68rem;
+        }
+
+        /* ---------- Responsive ---------- */
+
+        @media (max-width: 860px) {
+            main.layout {
+                grid-template-columns: 1fr; /* passe en 1 colonne seulement sur mobile */
+            }
+
+            .hero-block {
+                grid-template-columns: 1fr;
+            }
+
+            header.site-header {
+                padding: 1rem 1.2rem;
+            }
+
+            .header-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav.main-nav ul {
+                flex-wrap: wrap;
+                gap: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- En-tête & navigation -->
+        <header class="site-header">
+            <div class="header-inner">
+                <div style="display:flex; align-items:center; gap:0.9rem;">
+                    <div class="logo-mark">XO</div>
+                    <div class="header-text-block">
+                        <div class="header-kicker">The Weeknd · Noir & Rouge</div>
+                        <h1 class="header-title">Une nuit maîtrisée, entre ombre et lumière</h1>
+                        <p class="header-sub">
+                            Une page sobre inspirée de l’univers nocturne de The Weeknd&nbsp;: fond noir profond,
+                            touches de rouge contrôlées, sans effets trop agressifs.
+                        </p>
+                    </div>
+                </div>
+                <nav class="main-nav" aria-label="Navigation principale">
+                    <ul>
+                        <li><a href="#story">Chapitre</a></li>
+                        <li><a href="#tracks">Morceaux</a></li>
+                        <li><a href="#moods">Ambiance</a></li>
+                        <li><a href="The Weeknd 2.html">Biographie</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Contenu principal : 2 colonnes -->
+        <main class="layout">
+            <!-- Colonne gauche -->
+            <section class="column" id="story">
+                <div class="column-inner">
+                    <h2 class="section-title">Scène de nuit</h2>
+                    <p class="lead">
+                        La ville est presque silencieuse. Seuls restent quelques halos rouges sur la chaussée et
+                        une voix qui flotte encore dans l’habitacle de la voiture.
+                    </p>
+
+                    <div class="hero-block">
+                        <div class="hero-text">
+                            <h3>Entre contrôle et perte de repères</h3>
+                            <p class="tagline">
+                                Le personnage avance, sûr de lui, mais chaque feu rouge lui rappelle
+                                ce qu’il a laissé derrière lui pour en arriver là.
+                            </p>
+                            <div class="pill-row">
+                                <span class="pill">Noir profond</span>
+                                <span class="pill">Rouge discret</span>
+                                <span class="pill">Ambiance élégante</span>
+                            </div>
+                            <a href="#tracks" class="hero-cta">
+                                Découvrir les titres
+                                <span>→</span>
+                            </a>
+                        </div>
+
+                        <div class="hero-visual-wrapper">
+                            <div class="hero-visual">
+                                <!-- Remplace par une image LOCALE -->
+                                <!-- Exemple : src="images/weeknd-noir-rouge.jpg" -->
+                                <img src="Cover Starboy.jpeg" alt="Portrait de The Weeknd dans une ambiance noire et rouge élégante">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="tracks">
+                        <h2 class="section-title">Titres pour la route</h2>
+                        <p class="lead">
+                            Quelques morceaux pour accompagner la nuit, sans la surcharger&nbsp;:
+                            juste ce qu’il faut de tension et de classe.
+                        </p>
+
+                        <div class="tracks-grid" aria-label="Morceaux suggérés">
+                            <article class="track-card">
+                                <div class="track-name">Starboy</div>
+                                <div class="track-tagline">Le costume du héros nocturne, porté avec distance.</div>
+                                <div class="track-pill">Confiance · Détachement</div>
+                            </article>
+
+                            <article class="track-card">
+                                <div class="track-name">Reminder</div>
+                                <div class="track-tagline">Une piqûre de rappel calme mais implacable.</div>
+                                <div class="track-pill">Statement · Fierté</div>
+                            </article>
+
+                            <article class="track-card">
+                                <div class="track-name">Die For You</div>
+                                <div class="track-tagline">Quand les sentiments restent après le reste.</div>
+                                <div class="track-pill">Attache · Loyauté</div>
+                            </article>
+
+                            <article class="track-card">
+                                <div class="track-name">After Hours</div>
+                                <div class="track-tagline">Pour les trajets qui finissent plus tard que prévu.</div>
+                                <div class="track-pill">Nuit · Confession</div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Colonne droite -->
+            <aside class="column" id="moods">
+                <div class="column-inner">
+                    <h2 class="section-title">Ambiance contrôlée</h2>
+                    <p class="lead">
+                        Plutôt que d’agresser les yeux, cette colonne joue la carte du calme&nbsp;:
+                        quelques accents rouges, beaucoup d’espace sombre.
+                    </p>
+
+                    <div class="mode-label">Mode d’écoute suggéré</div>
+                    <div class="mode-box" aria-hidden="true">
+                        <span class="mode-pill is-active">Lumineur rouge léger</span>
+                        <span class="mode-pill">Écran noir total</span>
+                    </div>
+
+                    <div class="note-card">
+                        Mets la lumière au minimum, laisse juste un reflet rouge dans la pièce.
+                        Tu dois sentir la musique comme une présence, pas comme un choc.
+                    </div>
+
+                    <div class="listen-card" aria-label="Simulation de lecteur">
+                        <div><strong>Lecture en cours — session de nuit</strong></div>
+                        <div>
+                            Imagine la progression du morceau comme ce trait lumineux qui avance&nbsp;:
+                            discret, continu, mais impossible à ignorer.
+                        </div>
+                        <div class="listen-bar">
+                            <span></span>
+                        </div>
+                        <div class="listen-hint">
+                            Volume modéré · Impact maximum
+                        </div>
+                    </div>
+
+                    <div class="journal-block" id="journal">
+                        <div class="journal-label">Journal de bord</div>
+                        <div class="journal-area">
+                            Note mentalement une chose que tu laisses dans la nuit
+                            pour repartir plus léger demain matin.
+                            <span class="caret" aria-hidden="true"></span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </main>
+
+        <!-- Pied de page -->
+        <footer class="site-footer">
+            <span>Fan page conceptuelle · Lucas Legrand & Baptiste Marlière</span>
+            <span>2 colonnes · noir &amp; rouge · sans JavaScript</span>
+        </footer>
+    </div>
+</body>
+</html>
